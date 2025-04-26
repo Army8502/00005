@@ -297,30 +297,3 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
--- Function to scale a UI element and all its children
-local function scaleUI(frame, scaleFactor)
-    -- Scale the size of the frame itself
-    frame.Size = UDim2.new(frame.Size.X.Scale * scaleFactor, frame.Size.X.Offset * scaleFactor, 
-                           frame.Size.Y.Scale * scaleFactor, frame.Size.Y.Offset * scaleFactor)
-    frame.Position = UDim2.new(frame.Position.X.Scale * scaleFactor, frame.Position.X.Offset * scaleFactor, 
-                                frame.Position.Y.Scale * scaleFactor, frame.Position.Y.Offset * scaleFactor)
-    
-    -- Iterate through all children of the frame and scale them
-    for _, child in ipairs(frame:GetChildren()) do
-        if child:IsA("GuiObject") then
-            -- Scale the child's size and position similarly
-            child.Size = UDim2.new(child.Size.X.Scale * scaleFactor, child.Size.X.Offset * scaleFactor,
-                                   child.Size.Y.Scale * scaleFactor, child.Size.Y.Offset * scaleFactor)
-            child.Position = UDim2.new(child.Position.X.Scale * scaleFactor, child.Position.X.Offset * scaleFactor,
-                                        child.Position.Y.Scale * scaleFactor, child.Position.Y.Offset * scaleFactor)
-            
-            -- If the child has UICorner or similar components, apply scaling to them too
-            if child:IsA("UICorner") then
-                local radius = child.CornerRadius
-                child.CornerRadius = UDim.new(radius.Scale * scaleFactor, radius.Offset * scaleFactor)
-            end
-        end
-    end
-end
-
-scaleUI(mainFrame, 1)  -- ย่อขนาด UI ลงครึ่งหนึ่ง
