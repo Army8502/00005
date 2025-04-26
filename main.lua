@@ -7,8 +7,8 @@ local screenGui = Instance.new("ScreenGui", game.CoreGui)
 screenGui.Name = "BackpackViewer"
 
 local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Size = UDim2.new(0, 300, 0, 200)
-mainFrame.Position = UDim2.new(0, 20, 0, 100)
+mainFrame.Size = UDim2.new(0, 180, 0, 140)
+mainFrame.Position = UDim2.new(0, 20, 0, 65)
 mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 mainFrame.BorderSizePixel = 0
 mainFrame.AnchorPoint = Vector2.new(0, 0)
@@ -19,13 +19,13 @@ mainCorner.CornerRadius = UDim.new(0, 12)
 
 -- Title
 local title = Instance.new("TextLabel", mainFrame)
-title.Size = UDim2.new(1, 0, 0, 36)
+title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
 title.BorderSizePixel = 0
-title.Text = "🎒 Backpack Viewer"
+title.Text = "🎒 Backpack "
 title.TextColor3 = Color3.fromRGB(230, 230, 230)
-title.TextSize = 18
+title.TextSize = 14
 title.Font = Enum.Font.SourceSansBold
 
 -- Rounded corners for title
@@ -66,6 +66,7 @@ end
 
 -- Emoji Map for specific items
 local emojiMap = {
+    -- Weapons
     ["M24"] = "🦌",
     ["Energy Bar Max"] = "🍫⚡"
 }
@@ -80,7 +81,7 @@ local function showBackpack(player)
     end
 
     local frame = Instance.new("Frame", screenGui)
-    frame.Size = UDim2.new(0, 240, 0, 180)
+    frame.Size = UDim2.new(0, 160, 0, 140)
     frame.Position = UDim2.new(0,
         mainFrame.AbsolutePosition.X + mainFrame.AbsoluteSize.X + 12,
         0,
@@ -93,24 +94,27 @@ local function showBackpack(player)
     frameCorner.CornerRadius = UDim.new(0, 12)
 
     local titleBar = Instance.new("Frame", frame)
-    titleBar.Size = UDim2.new(1, 0, 0, 36)
+    titleBar.Size = UDim2.new(1, 0, 0, 30)
     titleBar.Position = UDim2.new(0, 0, 0, 0)
     titleBar.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
     titleBar.BorderSizePixel = 0
+
+    local titleBarCorner = Instance.new("UICorner", titleBar)
+    titleBarCorner.CornerRadius = UDim.new(0, 12)
 
     local titleText = Instance.new("TextLabel", titleBar)
     titleText.Size = UDim2.new(1, -40, 1, 0)
     titleText.Position = UDim2.new(0, 12, 0, 0)
     titleText.BackgroundTransparency = 1
-    titleText.Text = "🎒 " .. player.Name .. "'s Items"
+    titleText.Text = "🎒 " .. player.Name .. ""
     titleText.TextColor3 = Color3.fromRGB(240, 240, 240)
     titleText.Font = Enum.Font.SourceSansBold
     titleText.TextSize = 16
     titleText.TextXAlignment = Enum.TextXAlignment.Left
 
     local closeBtn = Instance.new("TextButton", titleBar)
-    closeBtn.Size = UDim2.new(0, 28, 0, 28)
-    closeBtn.Position = UDim2.new(1, -36, 0, 4)
+    closeBtn.Size = UDim2.new(0, 24, 0, 24)
+    closeBtn.Position = UDim2.new(1, -32, 0, 4)
     closeBtn.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
     closeBtn.BorderSizePixel = 0
     closeBtn.Text = "X"
@@ -146,7 +150,7 @@ local function showBackpack(player)
                 idx += 1
                 if idx > 5 then break end
                 local lblFrame = Instance.new("Frame", container)
-                lblFrame.Size = UDim2.new(1, 0, 0, 32)
+                lblFrame.Size = UDim2.new(1, 0, 0, 20)
                 lblFrame.BackgroundColor3 = Color3.fromRGB(75, 75, 75)
                 lblFrame.BorderSizePixel = 0
 
@@ -184,7 +188,7 @@ local function toggleMinimize()
             miniFrame.Position = UDim2.new(0, 100, 0, 20)
             miniFrame.BackgroundColor3 = Color3.fromRGB(65, 65, 65)
             miniFrame.BorderSizePixel = 0
-            miniFrame.Text = "🔽"
+            miniFrame.Text = "🎒"
             miniFrame.TextColor3 = Color3.fromRGB(240, 240, 240)
             miniFrame.Font = Enum.Font.SourceSansBold
             miniFrame.TextSize = 18
@@ -205,7 +209,7 @@ end
 -- Create minimize button in mainFrame
 local minimizeBtn = Instance.new("TextButton", mainFrame)
 minimizeBtn.Name = "MinimizeBtn"
-minimizeBtn.Size = UDim2.new(0, 28, 0, 28)
+minimizeBtn.Size = UDim2.new(0, 28, 0, 24)
 minimizeBtn.Position = UDim2.new(0, 4, 0, 4)
 minimizeBtn.BackgroundColor3 = Color3.fromRGB(100, 100, 255)
 minimizeBtn.BorderSizePixel = 0
@@ -239,13 +243,13 @@ local function tryUpdatePlayerList()
         local backpack = player:FindFirstChild("Backpack")
         if backpack then
             local btn = Instance.new("TextButton", listFrame)
-            btn.Size = UDim2.new(1, -20, 0, 36)
+            btn.Size = UDim2.new(1, -20, 0, 26)
             btn.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
             btn.BorderSizePixel = 0
             btn.AutoButtonColor = true
             btn.TextColor3 = Color3.fromRGB(235, 235, 235)
             btn.Font = Enum.Font.SourceSansBold
-            btn.TextSize = 14
+            btn.TextSize = 10
             btn.Text = player.Name .. " (" .. countBackpackItems(backpack) .. ")"
 
             local btnCorner = Instance.new("UICorner", btn)
@@ -292,3 +296,31 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         script:Destroy()
     end
 end)
+
+-- Function to scale a UI element and all its children
+local function scaleUI(frame, scaleFactor)
+    -- Scale the size of the frame itself
+    frame.Size = UDim2.new(frame.Size.X.Scale * scaleFactor, frame.Size.X.Offset * scaleFactor, 
+                           frame.Size.Y.Scale * scaleFactor, frame.Size.Y.Offset * scaleFactor)
+    frame.Position = UDim2.new(frame.Position.X.Scale * scaleFactor, frame.Position.X.Offset * scaleFactor, 
+                                frame.Position.Y.Scale * scaleFactor, frame.Position.Y.Offset * scaleFactor)
+    
+    -- Iterate through all children of the frame and scale them
+    for _, child in ipairs(frame:GetChildren()) do
+        if child:IsA("GuiObject") then
+            -- Scale the child's size and position similarly
+            child.Size = UDim2.new(child.Size.X.Scale * scaleFactor, child.Size.X.Offset * scaleFactor,
+                                   child.Size.Y.Scale * scaleFactor, child.Size.Y.Offset * scaleFactor)
+            child.Position = UDim2.new(child.Position.X.Scale * scaleFactor, child.Position.X.Offset * scaleFactor,
+                                        child.Position.Y.Scale * scaleFactor, child.Position.Y.Offset * scaleFactor)
+            
+            -- If the child has UICorner or similar components, apply scaling to them too
+            if child:IsA("UICorner") then
+                local radius = child.CornerRadius
+                child.CornerRadius = UDim.new(radius.Scale * scaleFactor, radius.Offset * scaleFactor)
+            end
+        end
+    end
+end
+
+scaleUI(mainFrame, 0.5)  -- ย่อขนาด UI ลงครึ่งหนึ่ง
