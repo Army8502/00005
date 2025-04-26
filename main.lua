@@ -323,4 +323,4 @@ local function scaleUI(frame, scaleFactor)
     end
 end
 
-scaleUI(mainFrame, 0.5)  -- ย่อขนาด UI ลงครึ่งหนึ่ง
+scaleUI(mainFrame, 1)  -- ย่อขนาด UI ลงครึ่งหนึ่ง
