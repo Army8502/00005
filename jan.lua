@@ -340,6 +340,8 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
+
+
 local toggleImageBtn = Instance.new("ImageButton", screenGui)
 toggleImageBtn.Size = UDim2.new(0, 30, 0, 30)  -- ขนาดเหมือนเดิม
 toggleImageBtn.Position = UDim2.new(0, 20, 0, 20)  -- ตำแหน่งเหมือนเดิม
@@ -369,3 +371,50 @@ end
 
 -- เชื่อมโยงฟังก์ชั่นกับการกดปุ่มภาพ
 toggleImageBtn.MouseButton1Click:Connect(toggleUI)
+
+
+local function scaleUI(parent, scale)
+    -- ย่อ parent ก่อน
+    if parent:IsA("Frame") or parent:IsA("TextButton") or parent:IsA("TextLabel") or parent:IsA("ImageButton") then
+        parent.Size = UDim2.new(
+            parent.Size.X.Scale,
+            parent.Size.X.Offset * scale,
+            parent.Size.Y.Scale,
+            parent.Size.Y.Offset * scale
+        )
+        parent.Position = UDim2.new(
+            parent.Position.X.Scale,
+            parent.Position.X.Offset * scale,
+            parent.Position.Y.Scale,
+            parent.Position.Y.Offset * scale
+        )
+        if parent:IsA("TextLabel") or parent:IsA("TextButton") then
+            parent.TextSize = parent.TextSize * scale
+        end
+    end
+
+    -- แล้วย่อ descendants ต่อ
+    for _, child in ipairs(parent:GetDescendants()) do
+        if child:IsA("Frame") or child:IsA("TextButton") or child:IsA("TextLabel") or child:IsA("ImageButton") then
+            child.Size = UDim2.new(
+                child.Size.X.Scale,
+                child.Size.X.Offset * scale,
+                child.Size.Y.Scale,
+                child.Size.Y.Offset * scale
+            )
+            child.Position = UDim2.new(
+                child.Position.X.Scale,
+                child.Position.X.Offset * scale,
+                child.Position.Y.Scale,
+                child.Position.Y.Offset * scale
+            )
+            if child:IsA("TextLabel") or child:IsA("TextButton") then
+                child.TextSize = child.TextSize * scale
+            end
+        end
+    end
+end
+
+
+-- แล้วค่อยเรียก
+scaleUI(frame, 0.5)
