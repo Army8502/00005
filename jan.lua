@@ -20,7 +20,7 @@ local screenGui = Instance.new("ScreenGui", game.CoreGui)
 screenGui.Name = "FOV_UI"
 
 local frame = Instance.new("Frame", screenGui)
-frame.Size = UDim2.new(0.14, 0, 0.28, 0)  -- เล็กลง
+frame.Size = UDim2.new(0.14, 0, 0.28, 0)  -- ขนาด UI จะเป็นสัดส่วนของหน้าจอ
 frame.Position = UDim2.new(0.02, 0, 0.35, 0)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
@@ -44,7 +44,7 @@ local function styleButton(btn)
 end
 
 local toggleBtn = Instance.new("TextButton", frame)
-toggleBtn.Size = UDim2.new(0.85, 0, 0.12, 0)
+toggleBtn.Size = UDim2.new(0.85, 0, 0.12, 0)  -- ปรับขนาดให้เป็นสัดส่วนของหน้าจอ
 toggleBtn.Position = UDim2.new(0.075, 0, 0.06, 0)
 toggleBtn.Text = "FOV: OFF"
 styleButton(toggleBtn)
@@ -310,18 +310,13 @@ end)
 Players.PlayerRemoving:Connect(RemoveESP)
 
 -- UI Toggle Icon
-local toggleImageBtn = Instance.new("ImageButton", screenGui)
-toggleImageBtn.Size = UDim2.new(0, 32, 0, 32)
-toggleImageBtn.Position = UDim2.new(0.015, 0, 0.02, 0)
-toggleImageBtn.Image = "rbxassetid://118284077656202"
-toggleImageBtn.BackgroundTransparency = 1
-toggleImageBtn.BorderSizePixel = 2
-toggleImageBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+local toggleImage = Instance.new("ImageLabel", screenGui)
+toggleImage.Size = UDim2.new(0, 50, 0, 50)
+toggleImage.Position = UDim2.new(1, -60, 0.85, 0)
+toggleImage.Image = "rbxassetid://2924923136"
+toggleImage.BackgroundTransparency = 1
 
-local imgCorner = Instance.new("UICorner", toggleImageBtn)
-imgCorner.CornerRadius = UDim.new(0, 6)
-
-toggleImageBtn.MouseButton1Click:Connect(function()
+toggleImage.MouseButton1Click:Connect(function()
 	uiVisible = not uiVisible
-	frame.Visible = uiVisible
+	screenGui.Enabled = uiVisible
 end)
