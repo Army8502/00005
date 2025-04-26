@@ -68,6 +68,93 @@ end
 local emojiMap = {
     -- Weapons
     ["M24"] = "🦌",
+    ["C9"] = "🔫",
+    ["Draco"] = "🔫",
+    ["Uzi"] = "🔫",
+    ["P226"] = "🔫",
+    ["Double Barrel"] = "🔫",
+    ["AK47"] = "🔫",
+    ["Remington"] = "🔫",
+    ["RPG"] = "🚀",
+    ["MP5"] = "🔫",
+    ["Glock"] = "🔫",
+    ["Sawnoff"] = "🔫",
+    ["Crossbow"] = "🏹",
+    ["Hunting Rifle"] = "🦌",
+    ["G3"] = "🔫",
+    ["Anaconda"] = "🔫",
+
+    -- Utility Items
+    ["Soda Can"] = "🥤",
+    ["Rock"] = "🗿",
+    ["Mug"] = "🥛",
+    ["Spray Can"] = "🧯",
+    ["Molotov"] = "🍾🔥",
+    ["Grenade"] = "💣",
+    ["Jar"] = "🥫",
+    ["Fire Cracker"] = "🧨",
+    ["Dumbbell Plate"] = "🏋️",
+    ["Cinder Block"] = "🧱",
+    ["Brick"] = "🧱",
+    ["Bowling Pin"] = "🎳",
+    ["Milkshake"] = "🥤",
+    ["Bottle"] = "🍾",
+    ["Jerry Can"] = "🛢️",
+    ["Glass"] = "🥛",
+    ["Tomato"] = "🍅",
+
+    -- Melee Weapons
+    ["Silver Mop"] = "🧹", 
+    ["Bronze Mop"] = "🧹",
+    ["Diamond Mop"] = "🧹",
+    ["Gold Mop"] = "🧹",
+    ["Mop"] = "🧹",
+
+    ["Baseball Bat"] = "🏏",
+    ["Barbed Baseball Bat"] = "🏏",
+    ["Bike Lock"] = "🔒",
+
+    ["Axe"] = "🪓",
+    ["Tactical Axe"] = "🪓",
+    ["Combat Axe"] = "🪓",
+
+    ["Switchblade"] = "🔪",
+    ["Tactical Knife"] = "🗡️",
+    ["Butcher Knife"] = "🔪",
+    ["Machette"] = "🔪",
+    ["Shank"] = "🗡️",
+
+    ["Tactical Shovel"] = "⛏️",
+    ["Rusty Shovel"] = "⚒️",
+    ["Shovel"] = "🧹",
+
+    ["Wrench"] = "🔧",
+    ["Tire Iron"] = "🛠️",
+    ["Sledge Hammer"] = "🛠️",
+    ["Hammer"] = "🔨",
+    ["Crowbar"] = "🔩",
+
+    ["Taser"] = "⚡",
+    ["Frying Pan"] = "🍳",
+    ["Rolling Pin"] = "🌀",
+    ["Pool Cue"] = "🎱",
+    ["Chair Leg"] = "🪑",
+
+    ["Wooden Board"] = "🥖",
+    ["Nailed Wooden Board"] = "🥖",
+    ["Metal Pipe"] = "📏",
+    ["Metal Baseball Bat"] = "🥎",
+
+    -- Medical Items
+    ["Bandage"] = "🩹",
+    ["First Aid Kit"] = "⛑️",
+    ["Blood Bag"] = "🩸",
+    ["Emergency Care Kit"] = "🚑",
+    ["Pain Relief"] = "💊",
+    ["Energy Shot"] = "💉",
+    ["Pre Workout"] = "🏋️‍♂️⚡",
+    ["Bull Energy"] = "🐂⚡",
+    ["Monster X"] = "👹⚡",
     ["Energy Bar Max"] = "🍫⚡"
 }
 
@@ -296,4 +383,3 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
         script:Destroy()
     end
 end)
-
