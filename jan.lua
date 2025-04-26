@@ -21,7 +21,7 @@ screenGui.Name = "FOV_UI"
 
 -- ปรับขนาดและตำแหน่งของ UI ให้ติดขอบซ้ายมากขึ้น
 local frame = Instance.new("Frame", screenGui)
-frame.Size = UDim2.new(0, 180, 0, 200)  -- ขนาดของ UI โดยใช้ offset
+frame.Size = UDim2.new(0, 150, 0, 170)  -- ขนาดของ UI โดยใช้ offset
 frame.Position = UDim2.new(0, 20, 0.25, 0)  -- ใช้ scale สำหรับตำแหน่งที่ติดขอบซ้าย (X = 0) และ Y ใช้ scale สำหรับตั้งระยะจากขอบบน
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 frame.BorderSizePixel = 0
@@ -45,34 +45,34 @@ local function styleButton(btn)
 end
 
 local toggleBtn = Instance.new("TextButton", frame)
-toggleBtn.Size = UDim2.new(0, 160, 0, 25)  -- ขนาดปุ่ม
+toggleBtn.Size = UDim2.new(0, 140, 0, 27)  -- ขนาดปุ่ม
 toggleBtn.Position = UDim2.new(0.05, 0, 0.05, 0)  -- ใช้ scale สำหรับตำแหน่ง
 toggleBtn.Text = "FOV: OFF"
 styleButton(toggleBtn)
-toggleBtn.TextSize = 14
+toggleBtn.TextSize = 12
 
 local sizeLabel = Instance.new("TextLabel", frame)
-sizeLabel.Size = UDim2.new(0, 56, 0, 10)
+sizeLabel.Size = UDim2.new(0, 50, 0, 10)
 sizeLabel.Position = UDim2.new(0.05, 0, 0.25, 0)
 sizeLabel.Text = "Radius: " .. fovRadius
 sizeLabel.BackgroundTransparency = 1
 sizeLabel.TextColor3 = Color3.new(1, 1, 1)
 sizeLabel.Font = Enum.Font.SourceSans
-sizeLabel.TextSize = 14
+sizeLabel.TextSize = 12
 
 local plusBtn = Instance.new("TextButton", frame)
-plusBtn.Size = UDim2.new(0, 18, 0, 18)
+plusBtn.Size = UDim2.new(0, 16, 0, 16)
 plusBtn.Position = UDim2.new(0.55, 0, 0.25, 0)  -- ตำแหน่ง relative กับ frame
 plusBtn.Text = "+"
 styleButton(plusBtn)
-plusBtn.TextSize = 16
+plusBtn.TextSize = 14
 
 local minusBtn = Instance.new("TextButton", frame)
 minusBtn.Size = UDim2.new(0, 18, 0, 18)
 minusBtn.Position = UDim2.new(0.70, 0, 0.25, 0)
 minusBtn.Text = "-"
 styleButton(minusBtn)
-minusBtn.TextSize = 16
+minusBtn.TextSize = 14
 
 --// BUTTON FUNCTIONS
 toggleBtn.MouseButton1Click:Connect(function()
@@ -182,7 +182,7 @@ local function createGunToggleRow(labelText, defaultState, callback)
 
     local toggleButton = Instance.new("TextButton", rowFrame)
     toggleButton.Size = UDim2.new(0, 25, 0, 25)
-    toggleButton.Position = UDim2.new(1, -35, 0.5, -12)
+    toggleButton.Position = UDim2.new(1, -80, 0.5, -20)
     styleButton(toggleButton)
     toggleButton.TextSize = 20
     toggleButton.Text = ""  -- Start with empty text
@@ -222,13 +222,13 @@ end
 local recoilRow = createGunToggleRow("Recoil", recoilState, function(state)
 	setGunAttribute("Recoil", state and 1 or 0)
 end)
-recoilRow.Position = UDim2.new(0, 10, 0, 80)
+recoilRow.Position = UDim2.new(0, 10, 0, 70)
 recoilRow.Parent = frame
 
 local reloadRow = createGunToggleRow("Reload", reloadState, function(state)
 	setGunAttribute("ReloadTime", state and 2 or 0)
 end)
-reloadRow.Position = UDim2.new(0, 10, 0, 115)
+reloadRow.Position = UDim2.new(0, 10, 0, 105)
 reloadRow.Parent = frame
 
 -- ESP Toggle Row
@@ -302,7 +302,7 @@ end
 
 -- Create the ESP toggle row
 local espRow = createGunToggleRow("ESP", espState, setESPEnabled)
-espRow.Position = UDim2.new(0, 10, 0, 150)
+espRow.Position = UDim2.new(0, 10, 0, 140)
 espRow.Parent = frame
 
 -- Update when a new player joins
