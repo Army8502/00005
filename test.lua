@@ -1,5 +1,5 @@
-local ESP_LUA_URL    = "https://raw.githubusercontent.com/Army8502/Mobile/refs/heads/main/Esp.lua"
-local FULL_LUA_URL   = "https://raw.githubusercontent.com/Army8502/Mobile/refs/heads/main/Fov.lua"
+local ESP_LUA_URL    = "https://raw.githubusercontent.com/Army8502/PC/refs/heads/main/esp.lua"
+local FULL_LUA_URL   = "https://raw.githubusercontent.com/Army8502/PC/refs/heads/main/Fov.lua"
 local GITHUB_KEY_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/tdata.lua"
 local PLAYER_LIST_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/player.lua"
 
@@ -115,6 +115,25 @@ feedbackLabel.TextSize = 18
 feedbackLabel.TextColor3 = Color3.fromRGB(255,100,100)
 feedbackLabel.TextXAlignment = Enum.TextXAlignment.Center
 
+local function safeLoad(url)
+    local success, result = pcall(function()
+        return game:HttpGet(url)
+    end)
+    if success and result then
+        local loadedFunc, loadError = loadstring(result)
+        if loadedFunc then
+            local runSuccess, runError = pcall(loadedFunc)
+            if not runSuccess then
+                warn("Error while running script from:", url, runError)
+            end
+        else
+            warn("Error while compiling script from:", url, loadError)
+        end
+    else
+        warn("Error while fetching script from:", url, result)
+    end
+end
+
 local function checkKey()
     local key = input.Text
     if key == "" or key == "กรุณากรอก Key" then
@@ -123,6 +142,7 @@ local function checkKey()
         return
     end
 
+    -- ดึง Key
     local okKey, dataKey = pcall(function()
         return game:HttpGet(GITHUB_KEY_URL)
     end)
@@ -132,6 +152,7 @@ local function checkKey()
         return
     end
 
+    -- ดึง Player List
     local okPlayer, dataPlayer = pcall(function()
         return game:HttpGet(PLAYER_LIST_URL)
     end)
@@ -141,6 +162,7 @@ local function checkKey()
         return
     end
 
+    -- เช็ก Key
     local keyFound = false
     for line in dataKey:gmatch("[^\r\n]+") do
         if line == key then
@@ -149,6 +171,7 @@ local function checkKey()
         end
     end
 
+    -- เช็กชื่อผู้เล่น
     local playerFound = false
     local playerName = game.Players.LocalPlayer.Name
     for line in dataPlayer:gmatch("[^\r\n]+") do
@@ -158,27 +181,24 @@ local function checkKey()
         end
     end
 
+    -- ถ้าทั้ง Key และ Player ถูกต้อง
     if keyFound and playerFound then
         feedbackLabel.TextColor3 = Color3.fromRGB(100,255,100)
         feedbackLabel.Text = "✔️ Key และ ชื่อผู้เล่น ถูกต้อง! กำลังโหลด..."
         task.wait(1)
 
-        -- ✅ โหลดและรันสคริปต์แบบปลอดภัย
+        -- โหลดและรันแบบปลอดภัย
         task.spawn(function()
-            local success, err = pcall(function()
-                local fullScript = game:HttpGet(FULL_LUA_URL)
-                local espScript = game:HttpGet(ESP_LUA_URL)
-                loadstring(fullScript)()
-                task.wait(0.5)
-                loadstring(espScript)()
-            end)
-            if not success then
-                warn("เกิดข้อผิดพลาดขณะโหลดสคริปต์:", err)
-            end
+            safeLoad(FULL_LUA_URL)
+            task.wait(0.5)
+            safeLoad(ESP_LUA_URL)
         end)
 
-        -- ปิด UI หลังจากสั่งโหลด
-        screenGui:Destroy()
+        -- ปิด UI
+        task.wait(0.5)
+        if screenGui then
+            screenGui:Destroy()
+        end
     else
         feedbackLabel.TextColor3 = Color3.fromRGB(255,100,100)
         if not keyFound and not playerFound then
