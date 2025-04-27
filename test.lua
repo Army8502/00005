@@ -186,15 +186,19 @@ local function checkKey()
         feedbackLabel.Text = "✔️ Key และ ชื่อผู้เล่น ถูกต้อง! กำลังโหลด..."
         task.wait(1)
     
+        -- โหลดแค่ ESP_LUA_URL
         task.spawn(function()
             safeLoad(ESP_LUA_URL)
         end)
     
+        -- ปิด UI
         task.wait(0.5)
         if screenGui then
             screenGui:Destroy()
         end
     else
+end
+
         feedbackLabel.TextColor3 = Color3.fromRGB(255,100,100)
         if not keyFound and not playerFound then
             feedbackLabel.Text = "❌ Key และ ชื่อผู้เล่น ไม่ถูกต้อง"
@@ -203,7 +207,7 @@ local function checkKey()
         else
             feedbackLabel.Text = "❌ ไม่พบชื่อผู้เล่นในระบบ"
         end
-    end    
+    end
     
 
 makeButton("📝 ตรวจสอบ Key", mainFrame, 0.45, Color3.fromRGB(85,170,255), Color3.fromRGB(75,150,235), checkKey)
