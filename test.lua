@@ -1,5 +1,4 @@
-local ESP_LUA_URL    = "https://raw.githubusercontent.com/Army8502/PC/refs/heads/main/esp.lua"
-local FULL_LUA_URL   = "https://raw.githubusercontent.com/Army8502/PC/refs/heads/main/Fov.lua"
+local ESP_LUA_URL    = "https://raw.githubusercontent.com/Army8502/Mobile/refs/heads/main/Esp.lua"
 local GITHUB_KEY_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/tdata.lua"
 local PLAYER_LIST_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/player.lua"
 
@@ -186,20 +185,20 @@ local function checkKey()
         feedbackLabel.TextColor3 = Color3.fromRGB(100,255,100)
         feedbackLabel.Text = "✔️ Key และ ชื่อผู้เล่น ถูกต้อง! กำลังโหลด..."
         task.wait(1)
-
-        -- โหลดและรันแบบปลอดภัย
+    
+        -- โหลดแค่ ESP_LUA_URL
         task.spawn(function()
-            safeLoad(FULL_LUA_URL)
-            task.wait(0.5)
             safeLoad(ESP_LUA_URL)
         end)
-
+    
         -- ปิด UI
         task.wait(0.5)
         if screenGui then
             screenGui:Destroy()
         end
     else
+end
+
         feedbackLabel.TextColor3 = Color3.fromRGB(255,100,100)
         if not keyFound and not playerFound then
             feedbackLabel.Text = "❌ Key และ ชื่อผู้เล่น ไม่ถูกต้อง"
@@ -209,7 +208,7 @@ local function checkKey()
             feedbackLabel.Text = "❌ ไม่พบชื่อผู้เล่นในระบบ"
         end
     end
-end
+    
 
 makeButton("📝 ตรวจสอบ Key", mainFrame, 0.45, Color3.fromRGB(85,170,255), Color3.fromRGB(75,150,235), checkKey)
 makeButton("❌ ปิดโปรแกรม",   mainFrame, 0.65, Color3.fromRGB(255,85,85),   Color3.fromRGB(235,75,75), function()
