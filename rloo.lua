@@ -1,6 +1,6 @@
-local ESP_LUA_URL    = "https://raw.githubusercontent.com/Army8502/Mobile/refs/heads/main/Esp.lua"
+local ESP_LUA_URL    = ""
 local FULL_LUA_URL   = "https://raw.githubusercontent.com/Army8502/Mobile/refs/heads/main/Fov.lua"
-local GITHUB_KEY_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/tdata.lua"
+local GITHUB_KEY_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/tdataa_Free.lua"
 local PLAYER_LIST_URL = "https://raw.githubusercontent.com/Army8502/KEY/refs/heads/main/player.lua"
 
 local HttpService = game:GetService("HttpService")
